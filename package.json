@@ -18,6 +18,7 @@
     "nodemon": "^2.0.16"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "open-term": "^2.0.4"
   }
 }

@@ -1,42 +1,44 @@
 const { exec } = require('child_process');
 const path = require('path');
 const { getLatestFile } = require('./getallfiles');
-// const { spawn } = require('child_process');
-const { VTexec } = require('open-term');
+const chalk = require('chalk');
 
-const latestFile = getLatestFile(__dirname);
-console.log('executing command nodemon ' + path.basename(latestFile));
+const fileStyle = chalk.magenta.bold.underline;
 
-if (path.basename(latestFile) !== path.basename(__filename)) {
-  VTexec(`nodemon ${path.basename(latestFile)}`);
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve('Awake'), ms);
+  });
 }
 
-// exec(`nodemon ${path.basename(latestFile)}`, (error, stdout, stderr) => {
-//   if (error) {
-//     console.log(`error: ${error.message}`);
-//     return;
-//   }
-//   if (stderr) {
-//     console.log(`stderr: ${stderr}`);
-//     return;
-//   }
-//   console.log(`stdout: ${stdout}`);
-// });
+const main = () => {
+  let previousChangeTime = null;
+  const checkForUpdates = () => {
+    sleep(500)
+      .then(() => {
+        const { path: latestFilePath, time: latestFileChangeTime } = getLatestFile(__dirname);
+        const latestFile = path.basename(latestFilePath);
 
-// const ls = spawn('nodemon', ['Consonant-value.js']);
-
-// ls.stdout.on('data', (data) => {
-//   console.log(`stdout: ${data}`);
-// });
-
-// ls.stderr.on('data', (data) => {
-//   console.log(`stderr: ${data}`);
-// });
-
-// ls.on('error', (error) => {
-//   console.log(`error: ${error.message}`);
-// });
-
-// ls.on('close', (code) => {
-//   console.log(`child process exited with code ${code}`);
-// });
+        if (previousChangeTime !== latestFileChangeTime && latestFile !== path.basename(__filename)) {
+          previousChangeTime = latestFileChangeTime;
+          console.log(`Displaying file:`, fileStyle(`${latestFilePath}`));
+          exec(`node ${latestFilePath}`, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log(`${stdout}`);
+          });
+        }
+        checkForUpdates();
+      })
+      .catch((error) => console.log(`error: ${error}`));
+  };
+  checkForUpdates();
+  // }
+};
+main();

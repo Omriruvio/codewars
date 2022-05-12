@@ -16,16 +16,17 @@ const getAllFiles = function (dirPath, extension = '.js', arrayOfFiles = []) {
       }
     }
   });
-
   return arrayOfFiles;
 };
 
 const getLatestFile = (dirname, extension) => {
   let arrayOfFiles = getAllFiles(dirname, extension);
   arrayOfFiles.sort((a, b) => a.time - b.time);
-  return arrayOfFiles.slice(-1)[0].path;
+  // return arrayOfFiles.slice(-1)[0].path;
+  return arrayOfFiles.slice(-1)[0];
 };
 
+// console.log(getAllFiles(__dirname));
 console.log(getLatestFile(__dirname));
 
 module.exports = { getAllFiles, getLatestFile };

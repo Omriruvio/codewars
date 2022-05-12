@@ -1,0 +1,23 @@
+{
+  "name": "codewars",
+  "version": "1.0.0",
+  "scripts": {
+    "latest": "node runlatest.js"
+  },
+  "repository": {
+    "url": "git+https://github.com/Omriruvio/codwars.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Omriruvio/codwars/issues"
+  },
+  "homepage": "https://github.com/Omriruvio/codwars#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "open-term": "^2.0.4"
+  }
+}

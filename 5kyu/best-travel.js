@@ -4,13 +4,26 @@
 // Ouput - highest sum of k or less distances
 
 function chooseBestSum(t, k, ls) {
-  // get unique combinations of n length
-  const getCombinations = (arr, n) => {};
+  const getCombinations = (arr, k) => {
+    if (k > arr.length || k <= 0) return [];
+    if (k === arr.length) return [arr];
+    if (k === 1) return arr.map((x) => [x]);
+
+    const combs = [];
+    for (let i = 0; i < arr.length - k + 1; i++) {
+      const head = [arr[i]];
+      const tail = getCombinations(arr.slice(i + 1), k - 1);
+      for (let j = 0; j < tail.length; j++) {
+        combs.push(head.concat(tail[j]));
+      }
+    }
+    return combs;
+  };
   const combinations = getCombinations(ls, k);
-  // get all combinations
-  let highest = 0;
+
+  let highest = null;
   for (const combination of combinations) {
-    let current = getSum(combination);
+    let current = combination.reduce((a, b) => a + b, 0);
     if (current > highest && current <= t) {
       highest = current;
     }

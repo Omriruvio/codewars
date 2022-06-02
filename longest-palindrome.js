@@ -14,6 +14,16 @@ const longestPalindrome = (str, sliceLength = str.length) => {
   return longestPalindrome(str, sliceLength - 1);
 };
 
+// const longestPalindrome = function (str) {
+//   if (!str) return 0;
+//   for (let sliceLen = str.length; sliceLen > 0; sliceLen--) {
+//     for (let i = 0; i < str.length - sliceLen + 1; i++) {
+//       const check = str.substr(i, sliceLen);
+//       if (check === check.split('').reverse().join('')) return sliceLen;
+//     }
+//   }
+// };
+
 console.log(longestPalindrome('a'), 1);
 console.log(longestPalindrome('aa'), 2);
 console.log(longestPalindrome('baa'), 2);

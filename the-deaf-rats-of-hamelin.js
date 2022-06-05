@@ -25,7 +25,7 @@ const countDeafRats = (town) => {
   let rat;
   const regexp = /~O|O~/g;
   while ((rat = regexp.exec(town))) {
-    const ratIndex = regexp.lastIndex - 1;
+    const ratIndex = rat.index;
     const ratType = rat[0] === '~O' ? 'right' : 'left';
     if (ratType === 'right' && ratIndex > piperIndex) deaf++;
     if (ratType === 'left' && ratIndex < piperIndex) deaf++;

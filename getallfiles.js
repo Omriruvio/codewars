@@ -1,14 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-const getAllFiles = function (dirPath, extension = '.js', arrayOfFiles = []) {
+const getAllFiles = function (dirPath, extensions = ['.js'], arrayOfFiles = []) {
   files = fs.readdirSync(dirPath);
 
   files.forEach(function (file) {
     if (fs.statSync(path.join(dirPath, '/', file)).isDirectory()) {
-      arrayOfFiles = getAllFiles(path.join(dirPath, '/', file), extension, arrayOfFiles);
+      arrayOfFiles = getAllFiles(path.join(dirPath, '/', file), extensions, arrayOfFiles);
     } else {
-      if (path.extname(file).toLowerCase() === extension) {
+      if (path.basename(file) === path.basename(__filename)) return;
+      if (extensions.includes(path.extname(file).toLowerCase())) {
         arrayOfFiles.push({
           path: path.join(dirPath, '/', file),
           time: fs.statSync(dirPath + '/' + file).mtime.getTime(),
@@ -19,10 +20,9 @@ const getAllFiles = function (dirPath, extension = '.js', arrayOfFiles = []) {
   return arrayOfFiles;
 };
 
-const getLatestFile = (dirname, extension) => {
-  let arrayOfFiles = getAllFiles(dirname, extension);
+const getLatestFile = (dirname, extensions) => {
+  let arrayOfFiles = getAllFiles(dirname, extensions);
   arrayOfFiles.sort((a, b) => a.time - b.time);
-  // return arrayOfFiles.slice(-1)[0].path;
   return arrayOfFiles.slice(-1)[0];
 };
 

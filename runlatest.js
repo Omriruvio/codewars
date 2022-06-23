@@ -2,8 +2,12 @@ const { exec } = require('child_process');
 const path = require('path');
 const { getLatestFile } = require('./getallfiles');
 const chalk = require('chalk');
-
 const fileStyle = chalk.magenta.bold.underline;
+
+const config = {
+  searchDirectory: __dirname,
+  trackedExtensions: ['.js', '.ts'],
+};
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -12,11 +16,12 @@ function sleep(ms) {
 }
 
 const main = () => {
+  const { searchDirectory, trackedExtensions } = config;
   let previousChangeTime = null;
   const checkForUpdates = () => {
     sleep(500)
       .then(() => {
-        const { path: latestFilePath, time: latestFileChangeTime } = getLatestFile(__dirname);
+        const { path: latestFilePath, time: latestFileChangeTime } = getLatestFile(searchDirectory, trackedExtensions);
         const latestFile = path.basename(latestFilePath);
 
         if (previousChangeTime !== latestFileChangeTime && latestFile !== path.basename(__filename)) {

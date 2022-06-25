@@ -1,3 +1,5 @@
 node_modules
 sandbox.js
 typescriptplayground.ts
+tsconfig.json
+dist

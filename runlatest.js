@@ -6,7 +6,7 @@ const fileStyle = chalk.magenta.bold.underline;
 
 const config = {
   searchDirectory: __dirname,
-  trackedExtensions: ['.js', '.ts'],
+  trackedExtensions: ['.js'],
 };
 
 function sleep(ms) {

@@ -1,5 +1,7 @@
 node_modules
 sandbox.js
+sandbox.ts
+sandbox.test.ts
 typescriptplayground.ts
 tsconfig.json
 dist

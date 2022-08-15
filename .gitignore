@@ -7,3 +7,4 @@ typescriptplayground.ts
 tsconfig.json
 dist
 test
+coverage

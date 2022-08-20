@@ -2,7 +2,8 @@ node_modules
 sandbox.js
 sandbox.ts
 sandbox.test.ts
-*.test.*
+sandbox.test.js
+my-promise.test.js
 typescriptplayground.ts
 tsconfig.json
 dist

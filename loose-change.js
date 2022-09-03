@@ -9,7 +9,7 @@ function looseChange(cents) {
     ['Pennies', 1],
   ]);
   const result = { Quarters: 0, Dimes: 0, Nickels: 0, Pennies: 0 };
-  for (const [type, value] of convert) {
+  for (const [type] of convert) {
     while (cents - convert.get(type) >= 0) {
       cents -= convert.get(type);
       result[type] = result[type] ? ++result[type] : 1;

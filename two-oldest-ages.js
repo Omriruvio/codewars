@@ -1,6 +1,10 @@
 // kata - https://www.codewars.com/kata/511f11d355fe575d2c000001
 
-// return the two oldest/oldest ages within the array of ages passed in.
+/**
+ * It returns the two oldest ages in an array.
+ * @param ages - an array of numbers representing ages
+ * @returns The two oldest ages in the array.
+ */
 function twoOldestAges(ages) {
   const { first, second } = ages.reduce(
     ({ first, second }, age) => {

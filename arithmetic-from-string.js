@@ -1,5 +1,12 @@
 // kata - https://www.codewars.com/kata/583f158ea20cfcbeb400000a
 
+/**
+ * It takes two numbers and an operator as arguments, and returns the result of the operation
+ * @param a - number
+ * @param b - number
+ * @param operator - A string of one of the following: add, subtract, multiply, divide.
+ * @returns the result of the operation.
+ */
 function arithmetic(a, b, operator) {
   const ops = {
     add: (a, b) => a + b,

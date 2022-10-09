@@ -1,22 +1,19 @@
 // kata - https://www.codewars.com/kata/55b4d87a3766d9873a0000d4
 
 const howMuch = (m, n) => {
-  const result = [];
-
-  const lower = Math.min(m, n);
-  const higher = Math.max(m, n);
-  const range = higher - lower;
-
-  for (let i = 0; i <= range; i++) {
-    const current = lower + i;
-    const b = Math.floor(current / 9);
-    const c = Math.floor(current / 7);
-    if (current - b * 9 === c * 7) {
-      result.push(['M: ' + current, 'B: ' + b, 'C: ' + c]);
+  const list1 = [];
+  for (let i = Math.min(m, n); i <= Math.max(m, n); i++) {
+    const list2 = [];
+    if (i % 7 === 2 && i % 9 === 1) {
+      list2.push(`M: ${i}`);
+      list2.push(`B: ${Math.floor(i / 7)}`);
+      list2.push(`C: ${Math.floor(i / 9)}`);
+    }
+    if (list2.length !== 0) {
+      list1.push(list2);
     }
   }
-
-  return result;
+  return list1;
 };
 
 const assert = require('assert');
